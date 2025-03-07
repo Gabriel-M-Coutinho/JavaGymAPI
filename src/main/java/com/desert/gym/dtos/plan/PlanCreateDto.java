@@ -24,21 +24,20 @@ public class PlanCreateDto {
     @Digits(integer = 10, fraction = 2, message = "O preço do plano deve ter no máximo 10 dígitos inteiros e 2 decimais")
     private BigDecimal price;
 
-    @NotNull(message = "O status do plano é obrigatório")
-    private Boolean isActive;
+
 
 
     // Construtores
     public void PlanDTO() {
     }
 
-    public void PlanDTO(int id, String name, String description, Integer duration, BigDecimal price, Boolean isActive) {
+    public void PlanDTO(int id, String name, String description, Integer duration, BigDecimal price ) {
 
         this.name = name;
         this.description = description;
         this.duration = duration;
         this.price = price;
-        this.isActive = isActive;
+
 
     }
 
@@ -75,13 +74,7 @@ public class PlanCreateDto {
         this.price = price;
     }
 
-    public Boolean isActive() {
-        return isActive;
-    }
 
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
 
 
 }

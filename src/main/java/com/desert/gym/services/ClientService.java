@@ -3,9 +3,11 @@
     import com.desert.gym.dtos.client.ClientCreateDto;
     import com.desert.gym.dtos.client.ClientResponseDto;
     import com.desert.gym.dtos.client.ClientUpdateDto;
+    import com.desert.gym.models.Plan;
     import com.desert.gym.models.client.Client;
     import com.desert.gym.models.client.ClientStatus;
     import com.desert.gym.repositories.ClientRepository;
+    import com.desert.gym.repositories.PlanRepository;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@
 
         @Autowired
         private ClientRepository clientRepository;
+
+        @Autowired
+        PlanRepository planRepository;
 
         public Client createClient(ClientCreateDto clientCreateDTO) {
 
@@ -87,6 +92,29 @@
             return clientRepository.findByNameContainingIgnoreCase(name);
         }
 
+
+        public Client subscribeToPlan(int clientId, int planId) {
+
+            Client client = clientRepository.findById(clientId)
+                    .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+
+            Plan plan = planRepository.findById(planId)
+                    .orElseThrow(() -> new RuntimeException("Plano não encontrado"));
+
+
+            client.subscribeToPlan(plan);
+
+
+            return clientRepository.save(client);
+        }
+
+
+        public boolean isPlanActive(int clientId) {
+            Client client = clientRepository.findById(clientId)
+                    .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+            return client.isPlanActive();
+        }
 
 
         public ClientResponseDto toClientResponseDto(Client client) {

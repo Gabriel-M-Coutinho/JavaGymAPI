@@ -4,7 +4,6 @@ import com.desert.gym.models.payment.Payment;
 import com.desert.gym.models.Plan;
 import jakarta.persistence.*;
 import java.time.LocalDate;
-
 import java.util.List;
 
 @Entity
@@ -42,6 +41,9 @@ public class Client {
     @ManyToOne
     @JoinColumn(name = "plan_id")
     private Plan plan;
+
+    @Column(name = "plan_expiration_date")
+    private LocalDate planExpirationDate;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Payment> payments;
@@ -120,12 +122,33 @@ public class Client {
         this.plan = plan;
     }
 
+    public LocalDate getPlanExpirationDate() {
+        return planExpirationDate;
+    }
+
+    public void setPlanExpirationDate(LocalDate planExpirationDate) {
+        this.planExpirationDate = planExpirationDate;
+    }
+
     public List<Payment> getPayments() {
         return payments;
     }
 
     public void setPayments(List<Payment> payments) {
         this.payments = payments;
+    }
+
+    // Métodos auxiliares
+
+
+    public boolean isPlanActive() {
+        return planExpirationDate != null && planExpirationDate.isAfter(LocalDate.now());
+    }
+
+
+    public void subscribeToPlan(Plan plan) {
+        this.plan = plan;
+        this.planExpirationDate = LocalDate.now().plusMonths(plan.getDuration());
     }
 
     @PrePersist

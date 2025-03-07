@@ -13,6 +13,7 @@ import java.util.List;
 
 @Entity(name = "plan")
 public class Plan {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
