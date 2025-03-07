@@ -1,11 +1,11 @@
 package com.desert.gym.controllers;
 
 import com.desert.gym.dtos.ApiResponse;
-import com.desert.gym.dtos.ClientCreateDto;
-import com.desert.gym.dtos.ClientResponseDto; // Adicione um DTO para a resposta
-import com.desert.gym.dtos.ClientUpdateDto;
+import com.desert.gym.dtos.client.ClientCreateDto;
+import com.desert.gym.dtos.client.ClientResponseDto;
+import com.desert.gym.dtos.client.ClientUpdateDto;
 import com.desert.gym.models.client.Client;
-import com.desert.gym.models.client.ClientStatus;
+
 import com.desert.gym.services.ClientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+
 import java.util.List;
 
 @RestController

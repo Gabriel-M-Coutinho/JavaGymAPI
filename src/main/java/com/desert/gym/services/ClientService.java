@@ -1,8 +1,8 @@
     package com.desert.gym.services;
 
-    import com.desert.gym.dtos.ClientCreateDto;
-    import com.desert.gym.dtos.ClientResponseDto;
-    import com.desert.gym.dtos.ClientUpdateDto;
+    import com.desert.gym.dtos.client.ClientCreateDto;
+    import com.desert.gym.dtos.client.ClientResponseDto;
+    import com.desert.gym.dtos.client.ClientUpdateDto;
     import com.desert.gym.models.client.Client;
     import com.desert.gym.models.client.ClientStatus;
     import com.desert.gym.repositories.ClientRepository;
@@ -12,7 +12,6 @@
     import java.time.LocalDate;
     import java.util.List;
     import java.util.Optional;
-    import java.util.concurrent.ExecutionException;
 
     @Service
     public class ClientService {

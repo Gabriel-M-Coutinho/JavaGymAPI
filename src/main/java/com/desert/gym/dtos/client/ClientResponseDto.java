@@ -1,4 +1,4 @@
-package com.desert.gym.dtos;
+package com.desert.gym.dtos.client;
 
 import com.desert.gym.models.Plan;
 import com.desert.gym.models.client.ClientStatus;
