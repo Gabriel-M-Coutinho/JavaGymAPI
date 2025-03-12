@@ -1,5 +1,6 @@
 package com.desert.gym.models.payment;
 
+import com.desert.gym.models.Installment.Installment;
 import com.desert.gym.models.Plan;
 import com.desert.gym.models.client.Client;
 import jakarta.persistence.*;
@@ -8,6 +9,7 @@ import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "payment")
@@ -53,6 +55,9 @@ public class Payment {
 
     @Column(length = 255)
     private String description;
+
+    @OneToMany(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Installment> installmentsList;
 
     // Getters e Setters
 
@@ -128,6 +133,14 @@ public class Payment {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Installment> getInstallmentsList() {
+        return installmentsList;
+    }
+
+    public void setInstallmentsList(List<Installment> installmentsList) {
+        this.installmentsList = installmentsList;
     }
 
     // Método para calcular o valor da parcela

@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "client", indexes = {
         @Index(name = "idx_client_name", columnList = "name"),
-        @Index(name = "idx_client_email", columnList = "email", unique = true)
+        @Index(name = "idx_client_email", columnList = "email")
 })
 public class Client {
     @Id
@@ -39,7 +39,7 @@ public class Client {
     private ClientStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "plan_id")
+    @JoinColumn(name = "plan_id", foreignKey = @ForeignKey(name = "fk_client_plan"))
     private Plan plan;
 
     @Column(name = "plan_expiration_date")
@@ -140,11 +140,9 @@ public class Client {
 
     // Métodos auxiliares
 
-
     public boolean isPlanActive() {
         return planExpirationDate != null && planExpirationDate.isAfter(LocalDate.now());
     }
-
 
     public void subscribeToPlan(Plan plan) {
         this.plan = plan;
